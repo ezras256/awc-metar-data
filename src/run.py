@@ -10,14 +10,17 @@ response = urllib.request.urlopen(url)
 lines = [line.decode('utf-8') for line in response.readlines()]
 cr = csv.reader(lines)
 
-kslg = []
+airportData = []
 
 for row in cr:
     for i in range(len(row)):
-        if i == 1 and row[i] == 'KSLG':
-            kslg = row
-
-metar = kslg[0]
+        if i == 1:
+            if row[i] == 'KSLG':
+                airportData = row
+            elif row[i] == 'KXNA':
+                airportData = row
+print(airportData)
+metar = airportData[0]
 
 metarDataList = metar.split(' ')
 
@@ -39,7 +42,7 @@ tminute = localdt.time().minute
 
 metarData['location'] = loc
 metarData['date'] = {'day': tday, 'month': tmonth, 'year': tyear}
-metarData['time'] = {'hour': str((int(time[1]) - 5) % 24), 'minute': time[2]}
+metarData['time'] = {'hour': str((int(time[1]) + 5) % 24), 'minute': time[2]}
 metarData['report type'] = reportType
 metarData['wind'] = wind
 print(metarData)
