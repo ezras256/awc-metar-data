@@ -1,0 +1,27 @@
+{
+    "location" : null, 
+    "day": null, 
+    "time": [
+        null, 
+        null
+    ], 
+    
+    "report type": null, 
+    "wind": {
+        "from": null, 
+        "speed": null
+    }, 
+
+    "visibility": null, 
+    "cloud layer 1": {
+        "type": null,
+        "height": null
+    }, 
+    "cloud layer 2": {
+        "type": null, 
+        "height": null
+    }, 
+    "temperature": null, 
+    "dew point": null, 
+    "air pressure": null
+}

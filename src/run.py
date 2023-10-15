@@ -20,9 +20,20 @@ for row in cr:
             elif row[i] == 'KXNA':
                 airportData = row
 print(airportData)
+
 metar = airportData[0]
 
 metarDataList = metar.split(' ')
+print(metarDataList)
+for i in metarDataList:
+    if i == 'AUTO':
+        metarDataList.pop(metarDataList.index(i))
+    # if i == 'RMK':
+        # for j in range(len(metarDataList) - metarDataList.index(i)):
+            # ind = metarDataList.index(i) + j
+            # 
+
+print(metarDataList)
 
 loc = metarDataList[0]
 time = [
@@ -35,14 +46,12 @@ print(metarDataList)
 dt = datetime.datetime.now()
 localdt = dt.replace(tzinfo=pytz.utc).astimezone(localTime)
 tday = localdt.day
-tmonth = localdt.month
-tyear = localdt.year
 thour = localdt.time().hour
 tminute = localdt.time().minute
 
 metarData['location'] = loc
-metarData['date'] = {'day': tday, 'month': tmonth, 'year': tyear}
-metarData['time'] = {'hour': str((int(time[1]) + 5) % 24), 'minute': time[2]}
+metarData['day'] = tday
+metarData['time'] = [(int(time[1]) - 5) % 24, time[2]]
 metarData['report type'] = reportType
 metarData['wind'] = wind
 print(metarData)
